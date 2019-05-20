@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/navigation_tasks"
+            android:icon="@drawable/ic_library_books_black_24dp"
+            android:title="@string/navFirst"/>
+
+    <item
+            android:id="@+id/navigation_about"
+
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="@string/navSecond"/>
+
+</menu>

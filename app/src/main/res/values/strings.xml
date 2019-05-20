@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Taskie</string>
+    <string name="newTaskHeadingText">New task:</string>
+    <string name="newTaskTitleInputHint">Enter task title</string>
+    <string name="newTaskDescriptionInputHint">Enter task description</string>
+    <string name="lowPriority">Low</string>
+    <string name="mediumPriority">Medium</string>
+    <string name="highPriority">High</string>
+    <string name="saveTaskActionText">Save</string>
+    <string name="emptyFields">Check your inputs</string>
+    <string name="noTaskFound">No such task found</string>
+    <string name="no_data">No data! :(</string>
+    <string name="navFirst">Tasks</string>
+    <string name="navSecond">About</string>
+    <string name="authorTab">Author</string>
+    <string name="aboutTab">About</string>
+    <string name="author">Author of this project actually created this project for Android Dev Academy Osijek.</string>
+    <string name="about">This application tests your might and also tests my Kotlin and Android skills.</string>
+</resources>

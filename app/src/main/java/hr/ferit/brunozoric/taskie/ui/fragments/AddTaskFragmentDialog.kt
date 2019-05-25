@@ -13,12 +13,13 @@ import hr.ferit.brunozoric.taskie.common.displayToast
 import hr.ferit.brunozoric.taskie.model.Priority
 import hr.ferit.brunozoric.taskie.model.Task
 import hr.ferit.brunozoric.taskie.persistence.Repository
+import hr.ferit.brunozoric.taskie.persistence.TaskieRoomRepository
 import kotlinx.android.synthetic.main.fragment_dialog_new_task.*
 
 class AddTaskFragmentDialog: DialogFragment() {
 
     private var taskAddedListener: TaskAddedListener? = null
-    private val repository = Repository
+    private val repository = TaskieRoomRepository()
 
     interface TaskAddedListener{
         fun onTaskAdded(task: Task)
@@ -67,7 +68,7 @@ class AddTaskFragmentDialog: DialogFragment() {
         val title = newTaskTitleInput.text.toString()
         val description = newTaskDescriptionInput.text.toString()
         val priority = prioritySelector.selectedItem as Priority
-        val task = repository.save(title, description, priority)
+        val task = repository.addTask(data)
 
         clearUi()
 

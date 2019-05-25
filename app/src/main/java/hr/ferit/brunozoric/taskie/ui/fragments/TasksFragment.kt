@@ -12,6 +12,7 @@ import hr.ferit.brunozoric.taskie.common.gone
 import hr.ferit.brunozoric.taskie.common.visible
 import hr.ferit.brunozoric.taskie.model.Task
 import hr.ferit.brunozoric.taskie.persistence.Repository
+import hr.ferit.brunozoric.taskie.persistence.TaskieRoomRepository
 import hr.ferit.brunozoric.taskie.ui.activities.ContainerActivity
 import hr.ferit.brunozoric.taskie.ui.adapters.TaskAdapter
 import hr.ferit.brunozoric.taskie.ui.fragments.base.BaseFragment
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_tasks.*
 
 class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
 
-    private val repository = Repository
+    private val repository = TaskieRoomRepository()
     private val adapter by lazy { TaskAdapter {onItemSelected(it)} }
 
     override fun getLayoutResourceId() = R.layout.fragment_tasks

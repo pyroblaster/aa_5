@@ -2,6 +2,7 @@ package hr.ferit.brunozoric.taskie.persistence
 
 import hr.ferit.brunozoric.taskie.Taskie
 import hr.ferit.brunozoric.taskie.db.DaoProvider
+import hr.ferit.brunozoric.taskie.model.Priority
 import hr.ferit.brunozoric.taskie.model.Task
 
 class TaskieRoomRepository : TaskieRepository{
@@ -13,6 +14,11 @@ class TaskieRoomRepository : TaskieRepository{
 
     override fun getAllTasks(): List<Task> = taskieDao.getAllTasks()
     override fun addTask(task: Task) = taskieDao.addTask(task)
-    override fun delteTask(task: Task) = taskieDao.delteTask(task)
+    override fun deleteTask(task: Task) = taskieDao.deleteTask(task)
 
+    override fun editTask(task: Task, title: String, desc: String, priority: Priority) {
+        taskieDao.changeTitle(task.id,title)
+        taskieDao.changeDesc(task.id,desc)
+        taskieDao.changePriority(task.id,priority)
+    }
 }

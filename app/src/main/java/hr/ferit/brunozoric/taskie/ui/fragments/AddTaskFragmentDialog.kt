@@ -1,5 +1,6 @@
 package hr.ferit.brunozoric.taskie.ui.fragments
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils.isEmpty
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import hr.ferit.brunozoric.taskie.common.displayToast
 import hr.ferit.brunozoric.taskie.model.Priority
 import hr.ferit.brunozoric.taskie.model.Task
 import hr.ferit.brunozoric.taskie.persistence.Repository
+import hr.ferit.brunozoric.taskie.persistence.TaskPrefs
 import hr.ferit.brunozoric.taskie.persistence.TaskieRoomRepository
 import kotlinx.android.synthetic.main.fragment_dialog_new_task.*
 
@@ -49,9 +51,10 @@ class AddTaskFragmentDialog: DialogFragment() {
     }
 
     private fun initUi(){
+
         context?.let {
             prioritySelector.adapter = ArrayAdapter<Priority>(it, android.R.layout.simple_spinner_dropdown_item, Priority.values())
-            prioritySelector.setSelection(0)
+            prioritySelector.setSelection(TaskPrefs.getInt("Priority", 0))
         }
     }
 
@@ -68,8 +71,11 @@ class AddTaskFragmentDialog: DialogFragment() {
         val title = newTaskTitleInput.text.toString()
         val description = newTaskDescriptionInput.text.toString()
         val priority = prioritySelector.selectedItem as Priority
-        val task = repository.addTask(data)
+        val task = Task(title = title, description = description, priority = priority)
 
+        repository.addTask(task)
+
+        TaskPrefs.storeInt("Priority",priority.ordinal)
         clearUi()
 
         taskAddedListener?.onTaskAdded(task)

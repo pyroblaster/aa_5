@@ -11,7 +11,6 @@ import hr.ferit.brunozoric.taskie.common.EXTRA_TASK_ID
 import hr.ferit.brunozoric.taskie.common.gone
 import hr.ferit.brunozoric.taskie.common.visible
 import hr.ferit.brunozoric.taskie.model.Task
-import hr.ferit.brunozoric.taskie.persistence.Repository
 import hr.ferit.brunozoric.taskie.persistence.TaskieRoomRepository
 import hr.ferit.brunozoric.taskie.ui.activities.ContainerActivity
 import hr.ferit.brunozoric.taskie.ui.adapters.TaskAdapter

@@ -9,8 +9,11 @@ import hr.ferit.brunozoric.taskie.model.Task
 @Dao
 interface TaskieDao {
 
+    @Query("SELECT * FROM Task WHERE id =:id")
+    fun getTask(id: Int):Task
+
     @Query("SELECT * FROM Task")
-    fun getAllTasks(): List<Task>
+    fun getAllTasks(): MutableList<Task>
 
     @Insert(onConflict = IGNORE)
     fun addTask(task: Task)

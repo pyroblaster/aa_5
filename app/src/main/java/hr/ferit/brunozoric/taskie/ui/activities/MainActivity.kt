@@ -7,6 +7,7 @@ import hr.ferit.brunozoric.taskie.R
 import hr.ferit.brunozoric.taskie.common.showFragment
 import hr.ferit.brunozoric.taskie.ui.activities.base.BaseActivity
 import hr.ferit.brunozoric.taskie.ui.fragments.ClearAllListeners
+import hr.ferit.brunozoric.taskie.ui.fragments.SortTasks
 import hr.ferit.brunozoric.taskie.ui.fragments.TasksFragment
 import hr.ferit.brunozoric.taskie.ui.fragments.ViewPagerFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -34,6 +35,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     }
 
     private var clearAllListeners:ClearAllListeners? = null
+    private var sortT: SortTasks? = null
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         super.onCreateOptionsMenu(menu)
@@ -49,13 +51,18 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.deleteAllTasks -> callDeleteTasks()
-            R.id.sortTasks -> callDeleteTasks()
+            R.id.sortTasks -> sort()
         }
         return super.onOptionsItemSelected(item)
     }
 
+    private fun sort() {
+        sortT!!.sortTasks()
+    }
+
     override fun setListener(fragment: TasksFragment) {
         clearAllListeners = fragment
+        sortT = fragment
     }
 
     private fun callDeleteTasks(){

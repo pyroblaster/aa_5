@@ -19,7 +19,18 @@ import hr.ferit.brunozoric.taskie.ui.adapters.TaskAdapter
 import hr.ferit.brunozoric.taskie.ui.fragments.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_tasks.*
 
-class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener, ClearAllListeners {
+class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener, ClearAllListeners, SortTasks {
+    override fun sortTasks() {
+        progress.gone()
+        val data = repository.getAllTasks()
+        if (data.isNotEmpty()) {
+            data.sortBy { it.priority.ordinal }
+            noData.gone()
+        } else {
+            noData.visible()
+        }
+        adapter.setData(data)
+    }
 
     private val repository = TaskieRoomRepository()
     private val adapter by lazy { TaskAdapter({ onItemSelected(it) }, { onItemSwiped(it) }) }

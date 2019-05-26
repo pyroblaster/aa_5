@@ -11,7 +11,7 @@ object TaskPrefs{
         sharedPrefs().edit().putInt(key,value).apply()
     }
 
-    fun getInt(key: String, defaultValue:Int): Int {
+    fun getInt(key: String, value:Int): Int {
         return sharedPrefs().getInt(key, 0)
     }
 }

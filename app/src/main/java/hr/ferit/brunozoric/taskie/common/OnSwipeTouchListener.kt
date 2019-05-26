@@ -23,11 +23,17 @@ open class OnSwipeTouchListener(ctx: Context) : View.OnTouchListener {
         return gestureDetector.onTouchEvent(event)
     }
 
+
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
 
 
         override fun onDown(e: MotionEvent): Boolean {
             return true
+        }
+
+        override fun onSingleTapUp(e: MotionEvent?): Boolean {
+            onClick()
+            return super.onSingleTapUp(e)
         }
 
         override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
@@ -65,6 +71,8 @@ open class OnSwipeTouchListener(ctx: Context) : View.OnTouchListener {
     open fun onSwipeRight() {}
 
     open fun onSwipeLeft() {}
+
+    open fun onClick() {}
 
    // open fun onSwipeTop() {}
 

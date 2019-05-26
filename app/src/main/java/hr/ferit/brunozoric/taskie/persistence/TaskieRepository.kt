@@ -8,5 +8,6 @@ interface TaskieRepository{
     fun getAllTasks(): MutableList<Task>
     fun addTask(task: Task)
     fun deleteTask(task: Task)
+    fun deleteAllTasks()
     fun editTask(task:Task, title:String, desc:String, priority: Priority)
 }

@@ -14,22 +14,15 @@ class TaskHolder(override val containerView: View) : RecyclerView.ViewHolder(con
 
     fun bindData(task: Task, onItemSelected: (Task) -> Unit, onItemSwiped:(Task) -> Unit) {
 
-        containerView.setOnClickListener { onItemSelected(task) }
         containerView.setOnTouchListener(object : OnSwipeTouchListener(containerView.context) {
 
            /* override fun onSwipeTop() {
                 super.onSwipeTop()
-            }*/
+            }
 
-          /*  override fun onSwipeBottom() {
+            override fun onSwipeBottom() {
                 super.onSwipeBottom()
             }*/
-
-            override fun onTouch(v: View, event: MotionEvent): Boolean {
-                onItemSelected(task)
-                return super.onTouch(v, event)
-
-            }
 
             override fun onSwipeLeft() {
                 super.onSwipeLeft()
@@ -39,6 +32,11 @@ class TaskHolder(override val containerView: View) : RecyclerView.ViewHolder(con
             override fun onSwipeRight() {
                 super.onSwipeRight()
                 onItemSwiped(task)
+            }
+
+            override fun onClick() {
+                super.onClick()
+                onItemSelected(task)
             }
         })
 

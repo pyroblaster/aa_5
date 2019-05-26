@@ -6,12 +6,12 @@ import hr.ferit.brunozoric.taskie.R
 import hr.ferit.brunozoric.taskie.common.EXTRA_TASK_ID
 import hr.ferit.brunozoric.taskie.common.displayToast
 import hr.ferit.brunozoric.taskie.model.Task
-import hr.ferit.brunozoric.taskie.persistence.Repository
 import hr.ferit.brunozoric.taskie.persistence.TaskieRoomRepository
 import hr.ferit.brunozoric.taskie.ui.fragments.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_task_details.*
 
-class TaskDetailsFragment : BaseFragment() {
+
+class TaskDetailsFragment : BaseFragment(),UpdateTaskFragmentDialog.UpdateTaskLIstener {
 
     private val repository = TaskieRoomRepository()
     private var taskID = NO_TASK
@@ -24,7 +24,17 @@ class TaskDetailsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         arguments?.getInt(EXTRA_TASK_ID)?.let { taskID = it }
         tryDisplayTask(taskID)
+        initListeners()
+
     }
+    override fun onTaskEdited(task: Task) {
+        tryDisplayTask(id)
+    }
+
+    private fun initListeners() {
+        updateTaskButton.setOnClickListener { updateTask() }
+    }
+
 
     private fun tryDisplayTask(id: Int) {
         try {
@@ -40,6 +50,14 @@ class TaskDetailsFragment : BaseFragment() {
         detailsTaskDescription.text = task.description
         detailsPriorityView.setBackgroundResource(task.priority.getColor())
     }
+
+    private fun updateTask() {
+        val updateTaskDialog = UpdateTaskFragmentDialog.newInstance(taskID)
+        updateTaskDialog.setUpdateTaskLIstener(this)
+        updateTaskDialog.show(childFragmentManager,updateTaskDialog.tag)
+
+    }
+
 
     companion object {
         const val NO_TASK = -1

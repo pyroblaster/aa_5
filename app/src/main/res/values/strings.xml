@@ -16,4 +16,8 @@
     <string name="aboutTab">About</string>
     <string name="author">Author of this project actually created this project for Android Dev Academy Osijek.</string>
     <string name="about">This application tests your might and also tests my Kotlin and Android skills.</string>
+    <string name="taskHeadingUpdate">Update task</string>
+    <string name="editTaskNameUpdate">New task title:</string>
+    <string name="editTaskDescUpdate">New task description:</string>
+    <string name="editTaskPrioUpdate">New task priority:</string>
 </resources>

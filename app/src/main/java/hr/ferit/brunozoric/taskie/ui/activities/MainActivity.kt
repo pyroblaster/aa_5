@@ -1,15 +1,17 @@
 package hr.ferit.brunozoric.taskie.ui.activities
 
+import android.view.Menu
 import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import hr.ferit.brunozoric.taskie.R
 import hr.ferit.brunozoric.taskie.common.showFragment
 import hr.ferit.brunozoric.taskie.ui.activities.base.BaseActivity
+import hr.ferit.brunozoric.taskie.ui.fragments.ClearAllListeners
 import hr.ferit.brunozoric.taskie.ui.fragments.TasksFragment
 import hr.ferit.brunozoric.taskie.ui.fragments.ViewPagerFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener{
+class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener, TasksFragment.setListener{
 
     override fun getLayoutResourceId() = R.layout.activity_main
 
@@ -31,5 +33,33 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         return true
     }
 
+    private var clearAllListeners:ClearAllListeners? = null
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        super.onCreateOptionsMenu(menu)
+        supportFragmentManager.fragments.last()?.let {
+            if (it is TasksFragment) {
+                menuInflater.inflate(R.menu.menu_layout, menu)
+            }
+        }
+        return true
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.deleteAllTasks -> callDeleteTasks()
+            R.id.sortTasks -> callDeleteTasks()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun setListener(fragment: TasksFragment) {
+        clearAllListeners = fragment
+    }
+
+    private fun callDeleteTasks(){
+        clearAllListeners!!.deletAllTasks()
+    }
 
 }

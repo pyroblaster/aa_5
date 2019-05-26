@@ -14,14 +14,19 @@ import hr.ferit.brunozoric.taskie.common.visible
 import hr.ferit.brunozoric.taskie.model.Task
 import hr.ferit.brunozoric.taskie.persistence.TaskieRoomRepository
 import hr.ferit.brunozoric.taskie.ui.activities.ContainerActivity
+import hr.ferit.brunozoric.taskie.ui.activities.MainActivity
 import hr.ferit.brunozoric.taskie.ui.adapters.TaskAdapter
 import hr.ferit.brunozoric.taskie.ui.fragments.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_tasks.*
 
-class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
+class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener, ClearAllListeners {
 
     private val repository = TaskieRoomRepository()
     private val adapter by lazy { TaskAdapter({ onItemSelected(it) }, { onItemSwiped(it) }) }
+
+    interface setListener {
+        fun setListener(fragment: TasksFragment)
+    }
 
     override fun getLayoutResourceId() = R.layout.fragment_tasks
 
@@ -34,8 +39,8 @@ class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
 
     override fun onResume() {
         super.onResume()
+        (activity as MainActivity).setListener(this)
         refreshTasks()
-
     }
     private fun initUi() {
         progress.visible()
@@ -80,6 +85,11 @@ class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
     private fun onItemSwiped(it: Task) {
         repository.deleteTask(it)
         Toast.makeText(this.context, "Task deleted", Toast.LENGTH_LONG).show()
+        refreshTasks()
+    }
+
+    override fun deletAllTasks() {
+        repository.deleteAllTasks()
         refreshTasks()
     }
 

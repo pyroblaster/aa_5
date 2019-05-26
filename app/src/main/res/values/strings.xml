@@ -20,4 +20,6 @@
     <string name="editTaskNameUpdate">New task title:</string>
     <string name="editTaskDescUpdate">New task description:</string>
     <string name="editTaskPrioUpdate">New task priority:</string>
+    <string name="deleteAllTasks">Delete all tasks</string>
+    <string name="sortTasks">Sort (not working)</string>
 </resources>

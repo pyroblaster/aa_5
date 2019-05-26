@@ -1,18 +1,46 @@
 package hr.ferit.brunozoric.taskie.ui.adapters
 
+import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
+import hr.ferit.brunozoric.taskie.common.OnSwipeTouchListener
 import hr.ferit.brunozoric.taskie.model.Task
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_task.view.*
 
 class TaskHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
-    fun bindData(task: Task, onItemSelected: (Task) -> Unit) {
+    fun bindData(task: Task, onItemSelected: (Task) -> Unit, onItemSwiped:(Task) -> Unit) {
 
         containerView.setOnClickListener { onItemSelected(task) }
+        containerView.setOnTouchListener(object : OnSwipeTouchListener(containerView.context) {
+
+           /* override fun onSwipeTop() {
+                super.onSwipeTop()
+            }*/
+
+          /*  override fun onSwipeBottom() {
+                super.onSwipeBottom()
+            }*/
+
+            override fun onTouch(v: View, event: MotionEvent): Boolean {
+                onItemSelected(task)
+                return super.onTouch(v, event)
+
+            }
+
+            override fun onSwipeLeft() {
+                super.onSwipeLeft()
+                onItemSwiped(task)
+            }
+
+            override fun onSwipeRight() {
+                super.onSwipeRight()
+                onItemSwiped(task)
+            }
+        })
 
         containerView.taskTitle.text = task.title
 

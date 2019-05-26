@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import hr.ferit.brunozoric.taskie.R
 import hr.ferit.brunozoric.taskie.model.Task
 
-class TaskAdapter(private val onItemSelected: (Task) -> Unit) : Adapter<TaskHolder>() {
+class TaskAdapter(private val onItemSelected: (Task) -> Unit, private val onItemSwiped: (Task) -> Unit) : Adapter<TaskHolder>() {
 
     private val data: MutableList<Task> = mutableListOf()
 
@@ -18,7 +18,7 @@ class TaskAdapter(private val onItemSelected: (Task) -> Unit) : Adapter<TaskHold
     override fun getItemCount() = data.size
 
     override fun onBindViewHolder(holder: TaskHolder, position: Int) {
-        holder.bindData(data[position], onItemSelected)
+        holder.bindData(data[position], onItemSelected, onItemSwiped)
     }
 
     fun setData(data: MutableList<Task>) {

@@ -3,6 +3,7 @@ package hr.ferit.brunozoric.taskie.ui.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import hr.ferit.brunozoric.taskie.R
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_tasks.*
 class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
 
     private val repository = TaskieRoomRepository()
-    private val adapter by lazy { TaskAdapter {onItemSelected(it)} }
+    private val adapter by lazy { TaskAdapter({ onItemSelected(it) }, { onItemSwiped(it) }) }
 
     override fun getLayoutResourceId() = R.layout.fragment_tasks
 
@@ -68,6 +69,12 @@ class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
     }
 
     override fun onTaskAdded(task: Task) {
+        refreshTasks()
+    }
+
+    private fun onItemSwiped(it: Task) {
+        repository.deleteTask(it)
+        Toast.makeText(this.context, "Task deleted", Toast.LENGTH_LONG).show()
         refreshTasks()
     }
 

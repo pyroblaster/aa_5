@@ -15,7 +15,7 @@ import hr.ferit.brunozoric.taskie.model.Task
 import hr.ferit.brunozoric.taskie.persistence.TaskieRoomRepository
 import kotlinx.android.synthetic.main.fragment_update_task.*
 
-class UpdateTaskFragmentDialog(var i: Int):DialogFragment(){
+class UpdateTaskFragmentDialog(var taskId: Int):DialogFragment(){
 
 private val repository = TaskieRoomRepository()
 private var updateTaskListener: UpdateTaskLIstener? = null
@@ -49,7 +49,7 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 }
 
 private fun initUi(){
-    task = repository.getTask(id)
+    task = repository.getTask(taskId)
 
     context?.let {
         taskPriorityUpdate.adapter = ArrayAdapter<Priority>(it, android.R.layout.simple_spinner_dropdown_item, Priority.values())
@@ -90,6 +90,6 @@ private fun isInputEmpty(): Boolean = TextUtils.isEmpty(tasktTitleUpdate.text) |
 )
 
 companion object{
-    fun newInstance(id: Int)= UpdateTaskFragmentDialog (id)
+    fun newInstance(taskId: Int)= UpdateTaskFragmentDialog (taskId)
 }
 }

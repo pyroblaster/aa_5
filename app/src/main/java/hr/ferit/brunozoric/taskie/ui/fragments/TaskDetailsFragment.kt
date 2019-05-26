@@ -28,7 +28,7 @@ class TaskDetailsFragment : BaseFragment(),UpdateTaskFragmentDialog.UpdateTaskLI
 
     }
     override fun onTaskEdited(task: Task) {
-        tryDisplayTask(id)
+        tryDisplayTask(taskID)
     }
 
     private fun initListeners() {

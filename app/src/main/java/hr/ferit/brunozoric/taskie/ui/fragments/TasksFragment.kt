@@ -32,6 +32,11 @@ class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
         refreshTasks()
     }
 
+    override fun onResume() {
+        super.onResume()
+        refreshTasks()
+
+    }
     private fun initUi() {
         progress.visible()
         noData.visible()
